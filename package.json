@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/warrenrobert127/readMe-Generator/issues"
   },
-  "homepage": "https://github.com/warrenrobert127/readMe-Generator#readme"
+  "homepage": "https://github.com/warrenrobert127/readMe-Generator#readme",
+  "description": "[How to create a Professional README](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
