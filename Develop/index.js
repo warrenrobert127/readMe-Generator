@@ -118,14 +118,14 @@ const promptUser = () => {
       type: "list",
       message: "Choose a license for your project.",
       choices: [
+        "None",
         "GNU-AGPLv3",
         "GNU-GPLv3",
         "GNU-LGPLv3",
-        "Mozilla-Public License 2.0",
-        "Apache License 2.0",
-        "MIT-License",
-        "Boost Software License 1.0",
-        "The Unlicense",
+        "Mozilla-Public-License-2.0",
+        "Apache-License-2.0",
+        "MIT",
+        "Boost-Software-License-1.0",
       ],
       name: "license",
     },
@@ -146,20 +146,16 @@ const writeFile = (data) => {
   });
 };
 
-// // TODO: Create a function to initialize app
-// function init() {}
 
-// // Function call to initialize app
-// init();
 
 promptUser()
   .then((answers) => {
-    return generatePage(answers);
+    return generatePage(answers)
   })
   .then((data) => {
-    return writeFile(data);
+    return writeFile(data)
   })
   // catching errors
   .catch((err) => {
-    console.log(err);
+    console.log(err)
   });
