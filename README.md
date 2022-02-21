@@ -1,5 +1,5 @@
 # README.md Generator
-  ![Github licence](https://img.shields.io/badge/license-Mozilla-Public-License-2.0-blue.svg)
+  ![Github license](https://img.shields.io/badge/license-Mozilla-Public-License-2.0-blue.svg)
   ## Description 
   A Command line application that dynamically generates a professional README.md file from a user’s input using the inquirer package
   ## Table of Contents
