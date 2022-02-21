@@ -2,42 +2,39 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-// TODO: Create an array of questions for user input
-const questions = [
-  {
-    type: "input",
-    name: "name",
-    message: "What is your name? (Required)",
-    validate: (nameInput) => {
-      if (nameInput) {
-        return true;
-      } else {
-        console.log("Please enter your name!");
-        return false;
-      }
-    },
-  },
-  {
-    type: "input",
-    name: "github",
-    message: "Enter your GitHub Username (Required)",
-    validate: (githubInput) => {
-      if (githubInput) {
-        return true;
-      } else {
-        console.log("Please enter your GitHub username!");
-        return false;
-      }
-    },
-  },
-];
+//Internal module
+const generatePage = require("./utils/generateMarkdown.js");
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// TODO: Create an array of questions for user inpu
 
-// TODO: Create a function to initialize app
 const promptUser = () => {
   return inquirer.prompt([
+    {
+      type: "input",
+      name: "github",
+      message: "Enter your GitHub Username (Required)",
+      validate: (githubInput) => {
+        if (githubInput) {
+          return true;
+        } else {
+          console.log("Please enter your GitHub username!");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Enter your email address (Required)",
+      validate: (emailInput) => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter your email address!");
+          return false;
+        }
+      },
+    },
     {
       type: "input",
       name: "title",
@@ -92,34 +89,77 @@ const promptUser = () => {
       },
     },
     {
-      type: "input",
-      name: "usage",
-      message: "Provide instructions and examples for use (Required)",
-      validate: (usageInput) => {
-        if (usageInput) {
-          return true;
-        } else {
-          console.log("Please provide instructions and examples for use!");
-          return false;
-        }
-      },
-    },
-    {
       type: "confirm",
-      name: "confirmAbout",
+      name: "confirmCollaborators",
       message:
-        'Would you like to enter some information about yourself for an "About" section?',
+        "Would you like to list any collaborators, third-party assets or tutorials?",
       default: true,
     },
     {
       type: "input",
-      name: "about",
-      message: "Provide some information about yourself:",
-      when: ({ confirmAbout }) => confirmAbout,
+      name: "collaborators",
+      message:
+        "Provide some information about your collaborators, third-party assets or tutorials:",
+      when: ({ confirmCollaborators }) => confirmCollaborators,
+    },
+    {
+      type: "confirm",
+      name: "confirmTests",
+      message: "Do you have test for your applciation?",
+      default: true,
+    },
+    {
+      type: "input",
+      name: "tests",
+      message: "Provide some information about your test:",
+      when: ({ confirmTests }) => confirmTests,
+    },
+    {
+      type: "list",
+      message: "Choose a license for your project.",
+      choices: [
+        "GNU AGPLv3",
+        "GNU GPLv3",
+        "GNU LGPLv3",
+        "Mozilla Public License 2.0",
+        "Apache License 2.0",
+        "MIT License",
+        "Boost Software License 1.0",
+        "The Unlicense",
+      ],
+      name: "license",
     },
   ]);
 };
 
+// TODO: Create a function to write README file
+const writeFile = (data) => {
+  fs.writeFile("README.md", data, (err) => {
+    // if there is an error
+    if (err) {
+      console.log(err);
+      return;
+      // when the README has been created
+    } else {
+      console.log("Your README has been successfully created!");
+    }
+  });
+};
 
-// Function call to initialize app
-init();
+// // TODO: Create a function to initialize app
+// function init() {}
+
+// // Function call to initialize app
+// init();
+
+promptUser()
+  .then((answers) => {
+    return generatePage(answers);
+  })
+  .then((data) => {
+    return writeFile(data);
+  })
+  // catching errors
+  .catch((err) => {
+    console.log(err);
+  });
