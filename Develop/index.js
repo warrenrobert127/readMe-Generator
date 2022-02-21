@@ -23,7 +23,7 @@ const promptUser = () => {
       },
     },
     {
-      type: "input",
+      tyspe: "input",
       name: "email",
       message: "Enter your email address (Required)",
       validate: (emailInput) => {
