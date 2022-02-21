@@ -12,6 +12,7 @@
   
   ## Installation 
   To install this app you will need to run rpm install for the dependencies in your CLI, Inquirer and fs. This will allow the question prompts from the CLI for you to create your README.md
+  ![Demo](https://user-images.githubusercontent.com/20363030/155025925-950ba349-efbb-482c-b2e8-3000e955d7a2.mp4)
   ## Usage 
   Run command node index.js in the CLI and the inquirer package will begin prompts for generating your Readme SECTION INFORMATION. As you answer each question dynamically form the sections, and table of contents for your READme.
   ## License
